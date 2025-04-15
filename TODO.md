@@ -18,7 +18,11 @@
 ## Service
 
 ### UserService
-- [ ] 이미 가입된 회원 이라면 예외
+- [X] 회원 가입 시 이미 가입된 회원 이라면 예외
+- [X] 회원 가입 완료 후 Users PK 반환 
+
+### TodoCategoryService
+- [ ] 생성 완료 후 TodoCategory PK 반환 
 
 ### TodoService
 - [ ] 조회, 수정 삭제 중 유저의 Todo 아닐 시 예외
@@ -28,6 +32,14 @@
 - [ ] 조회, 수정 삭제 중 유저의 할 일 아닐 시 예외
 
 ## Repository
-- [ ] 유저로 TODO, 할 일 리스트 조회 (상태 별, 날짜 별)
 
+### UsersRepository
+- [X] 회원 가입, 로그인 시 필요한 유저 아이디로 도메인 찾기
+
+### TodoCategoryRepository
+- [ ] 생성 완료 후 Users PK 값 확인 
+- [ ] User PK 값으로 TodoCategory 리스트 반환
+
+### TodoRepository
+- [ ] TodoCategory PK 리스트 IN 절로 Todo 리스트 반환
 
