@@ -1,6 +1,7 @@
 package com.clush.clushbackapp.domain.todo;
 
 import com.clush.clushbackapp.domain.BaseTimeEntity;
+import com.clush.clushbackapp.domain.auth.Users;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -18,18 +19,25 @@ public class TodoCategory extends BaseTimeEntity {
 
     private String title;
 
-    public TodoCategory(Long todoCategoryId, String title) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "users_id")
+    private Users users;
+
+    public TodoCategory(Long todoCategoryId, String title, Users users) {
         this.todoCategoryId = todoCategoryId;
         this.title = title;
+        this.users = users;
+
     }
 
-    private TodoCategory(String title) {
-        this(null, title);
+    private TodoCategory(String title, Users users) {
+        this(null, title, users);
+        users.getTodoCategories().add(this);
     }
 
-    public static TodoCategory create(String title) {
+    public static TodoCategory create(String title, Users users) {
         notBlank(title);
-        return new TodoCategory(title);
+        return new TodoCategory(title, users);
     }
 
     private static void notBlank(String title) {

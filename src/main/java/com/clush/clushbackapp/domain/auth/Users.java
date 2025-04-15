@@ -1,11 +1,14 @@
 package com.clush.clushbackapp.domain.auth;
 
 import com.clush.clushbackapp.domain.BaseTimeEntity;
+import com.clush.clushbackapp.domain.todo.TodoCategory;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 @Entity
@@ -25,6 +28,9 @@ public class Users extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "user_role")
     private UserRole userRole;
+
+    @OneToMany(mappedBy = "users")
+    private List<TodoCategory> todoCategories = new ArrayList<>();
 
     public Users(Long usersId, String username, String password, UserRole userRole) {
         this.usersId = usersId;
