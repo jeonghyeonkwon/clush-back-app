@@ -38,6 +38,7 @@
 
 ### TodoCategoryRepository
 - [X] 생성 후 Users와 연관관계 매핑 확인
+- [X] users pk와 todoCategory pk로 조회 테스트(fetch join 사용)
 
 ### TodoRepository
 - [ ] TodoCategory PK 리스트 IN 절로 Todo 리스트 반환
