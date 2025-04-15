@@ -1,10 +1,7 @@
 package com.clush.clushbackapp.domain.todo;
 
 import com.clush.clushbackapp.domain.BaseTimeEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TodoCategory extends BaseTimeEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "todo_category_id")
     private Long todoCategoryId;
 
@@ -25,9 +23,13 @@ public class TodoCategory extends BaseTimeEntity {
         this.title = title;
     }
 
+    private TodoCategory(String title) {
+        this(null, title);
+    }
+
     public static TodoCategory create(String title) {
         notBlank(title);
-        return new TodoCategory(1L, title);
+        return new TodoCategory(title);
     }
 
     private static void notBlank(String title) {

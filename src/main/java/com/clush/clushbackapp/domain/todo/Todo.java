@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 public class Todo extends BaseTimeEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "todo_id")
     private Long todoId;
 
@@ -38,10 +39,13 @@ public class Todo extends BaseTimeEntity {
         this.todoPriority = todoPriority;
     }
 
+    private Todo(String title, String content, TodoStatus todoStatus, TodoPriority todoPriority) {
+        this(null, title, content, todoStatus, todoPriority);
+    }
+
     public static Todo create(String title, String content, TodoStatus todoStatus, TodoPriority todoPriority) {
         validate(title, content);
-        return new Todo(1L, title, content, todoStatus, todoPriority);
-
+        return new Todo(title, content, todoStatus, todoPriority);
     }
 
     private static void validate(String title, String content) {

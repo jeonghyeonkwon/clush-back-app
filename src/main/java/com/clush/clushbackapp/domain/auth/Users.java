@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Users extends BaseTimeEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "users_id")
     private Long usersId;
 
@@ -32,9 +33,13 @@ public class Users extends BaseTimeEntity {
         this.userRole = userRole;
     }
 
+    private Users(String username, String password, UserRole role) {
+        this(null, username, password, role);
+    }
+
     public static Users create(String username, String password) {
         validate(username, password);
-        return new Users(1L, username, password, UserRole.BASIC);
+        return new Users(username, password, UserRole.BASIC);
     }
 
     private static void validate(String username, String password) {
