@@ -3,10 +3,6 @@ package com.clush.clushbackapp.domain.todo;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class TodoTest {
 
     @Test
