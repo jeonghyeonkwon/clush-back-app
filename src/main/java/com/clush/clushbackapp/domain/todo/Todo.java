@@ -6,8 +6,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Getter
 @Table
@@ -31,21 +29,28 @@ public class Todo extends BaseTimeEntity {
     @Column(name = "priority")
     private TodoPriority todoPriority;
 
-    public Todo(Long todoId, String title, String content, TodoStatus todoStatus, TodoPriority todoPriority) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "todo_category_id")
+    private TodoCategory todoCategory;
+
+
+    public Todo(Long todoId, String title, String content, TodoStatus todoStatus, TodoPriority todoPriority, TodoCategory todoCategory) {
         this.todoId = todoId;
         this.title = title;
         this.content = content;
         this.todoStatus = todoStatus;
         this.todoPriority = todoPriority;
+        this.todoCategory = todoCategory;
     }
 
-    private Todo(String title, String content, TodoStatus todoStatus, TodoPriority todoPriority) {
-        this(null, title, content, todoStatus, todoPriority);
+    private Todo(String title, String content, TodoStatus todoStatus, TodoPriority todoPriority, TodoCategory todoCategory) {
+        this(null, title, content, todoStatus, todoPriority, todoCategory);
+        todoCategory.getTodos().add(this);
     }
 
-    public static Todo create(String title, String content, TodoStatus todoStatus, TodoPriority todoPriority) {
+    public static Todo create(String title, String content, TodoStatus todoStatus, TodoPriority todoPriority, TodoCategory todoCategory) {
         validate(title, content);
-        return new Todo(title, content, todoStatus, todoPriority);
+        return new Todo(title, content, todoStatus, todoPriority, todoCategory);
     }
 
     private static void validate(String title, String content) {

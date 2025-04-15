@@ -7,6 +7,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Entity
 @Table
@@ -23,12 +26,15 @@ public class TodoCategory extends BaseTimeEntity {
     @JoinColumn(name = "users_id")
     private Users users;
 
+    @OneToMany(mappedBy = "todoCategory")
+    private List<Todo> todos = new ArrayList<>();
+
     public TodoCategory(Long todoCategoryId, String title, Users users) {
         this.todoCategoryId = todoCategoryId;
         this.title = title;
         this.users = users;
-
     }
+
 
     private TodoCategory(String title, Users users) {
         this(null, title, users);

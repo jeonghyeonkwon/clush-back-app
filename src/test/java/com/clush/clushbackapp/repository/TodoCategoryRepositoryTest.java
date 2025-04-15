@@ -29,16 +29,12 @@ class TodoCategoryRepositoryTest {
     @Autowired
     private TestEntityManager testEntityManager;
 
-    Users savedUser;
-    TodoCategory todoCategory;
-
     String username = "jeonghyeon";
     String password = "1234";
 
-
     @BeforeEach
     void init() {
-        savedUser = usersRepository.save(Users.create(username, password));
+        Users savedUser = usersRepository.save(Users.create(username, password));
         List<TodoCategory> todoCategories = List.of(
                 TodoCategory.create("대분류 카테고리", savedUser),
                 TodoCategory.create("대분류 카테고리2", savedUser)
