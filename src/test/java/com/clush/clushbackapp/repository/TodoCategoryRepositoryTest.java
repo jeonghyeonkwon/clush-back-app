@@ -35,9 +35,10 @@ class TodoCategoryRepositoryTest {
 
     Users savedUser;
     Long categoryId;
+
     @BeforeEach
     void init() {
-         savedUser = usersRepository.save(Users.create(username, password));
+        savedUser = usersRepository.save(Users.create(username, password));
         List<TodoCategory> todoCategories = List.of(
                 TodoCategory.create("대분류 카테고리", savedUser),
                 TodoCategory.create("대분류 카테고리2", savedUser)
@@ -58,19 +59,12 @@ class TodoCategoryRepositoryTest {
         assertThat(users.getTodoCategories()).hasSize(2);
     }
 
-
     @Test
-    @DisplayName("userId와 TodoCategoryId로 fetchJoin 조회 테스트")
-    void fetch_join_test(){
+    @DisplayName("userId와 TodoCategoryId로 조회 테스트")
+    void fetch_join_test() {
         Optional<TodoCategory> optional = todoCategoryRepository.findByUsersIdAndTodoCategoryId(savedUser.getUsersId(), categoryId);
         assertAll(
-                ()->assertTrue(optional.isPresent())
-        );
-
-        TodoCategory todoCategory = optional.get();
-
-        assertAll(
-                ()->assertThat(todoCategory.getUsers().getUsername()).isEqualTo(username)
+                () -> assertTrue(optional.isPresent())
         );
 
     }

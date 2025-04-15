@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface TodoCategoryRepository extends JpaRepository<TodoCategory, Long> {
 
-    @Query("SELECT c FROM TodoCategory c JOIN FETCH c.users u WHERE c.todoCategoryId = :todoCategoryId AND u.usersId = :usersId")
+    @Query("SELECT c FROM TodoCategory c WHERE c.todoCategoryId = :todoCategoryId AND c.users.usersId = :usersId")
     Optional<TodoCategory> findByUsersIdAndTodoCategoryId(@Param("usersId") Long usersId, @Param("todoCategoryId") Long todoCategoryId);
 
 }

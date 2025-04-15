@@ -11,7 +11,6 @@
 ### Todo 
 - [x] 검증 (빈 값)
 
-
 ### Schedule (일정)
 - [ ] 검증 (빈 값 검증)
 
@@ -22,9 +21,10 @@
 - [X] 회원 가입 완료 후 Users PK 반환 
 
 ### TodoCategoryService
-- [X] 생성 테스트 (등록 완료 후 PK 반환, 없는 회원으로 접근 시 에러)
+- [X] 생성 테스트 (등록 완료 후 PK 반환, 없는 회원으로 접근 시 예외)
 
 ### TodoService
+- [X] 생성 테스트 (등록 완료 후 PK 반환, 회원 또는 TodoCategory 가 없을 시 예외)
 - [ ] 조회, 수정 삭제 중 유저의 Todo 아닐 시 예외
 
 
@@ -38,8 +38,9 @@
 
 ### TodoCategoryRepository
 - [X] 생성 후 Users와 연관관계 매핑 확인
-- [X] users pk와 todoCategory pk로 조회 테스트(fetch join 사용)
+- [X] users pk와 todoCategory pk로 조회 테스트
 
 ### TodoRepository
+
 - [ ] TodoCategory PK 리스트 IN 절로 Todo 리스트 반환
 
